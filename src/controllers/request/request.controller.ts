@@ -10,6 +10,7 @@ import {
   UploadedFile,
   Request,
   Query,
+  Headers
 } from '@nestjs/common';
 import { RequestService } from './request.service';
 import { CreateRequestDto } from './dto/create-request.dto';
@@ -120,7 +121,7 @@ export class RequestController {
   @UseGuards(JwtAuthGuard,RolesGuard)
  @Roles(UserRole.ADMIN)
   @Post('email/:id')
-  async getEmail(@Body() emailData: any) {
+  async getEmail(@Body() emailData: any,@Headers() headers: any) {
     try {
       await this.mailService.sendMail(emailData);
       return { message: 'Email sent successfully' };
