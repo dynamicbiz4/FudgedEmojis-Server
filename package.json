@@ -8,7 +8,7 @@
   "scripts": {
     "init": "npm i",
     "build": "nest build && npm run copy-templates",
-    "copy-templates": "copyfiles -u 1 src/mail/templates/**/*.hbs /app/dist/mail/templates",
+    "copy-templates": "copyfiles -u 1 src/mail/templates/**/*.hbs dist/mail/templates",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "node dist/main",
     "start:dev": "nest start --watch",
