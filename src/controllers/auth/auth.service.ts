@@ -74,8 +74,8 @@ export class AuthService {
 
   async login(dto: LoginDto) {
     try {
-      const { email, password, role } = dto;
-      const existUser = await this.userModel.findOne({ email, role });
+      const { email, password } = dto;
+      const existUser = await this.userModel.findOne({ email });
 
       if (!existUser) {
         throw new ConflictException('Email not found');

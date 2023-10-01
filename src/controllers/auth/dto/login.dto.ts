@@ -9,6 +9,5 @@ export class LoginDto {
   @IsString()
   password: string;
 
-  @IsNotEmpty()
-  role: string;
+
 }

@@ -60,7 +60,8 @@ export class RequestController {
     return await this.requestService.getAllAcceptedToSpin();
   }
 
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard,RolesGuard)
+ @Roles(UserRole.ADMIN)
   @Get('after-spin')
   async getAllAfterSpin(){
     return await this.requestService.getAllAfterSpin();
@@ -116,7 +117,7 @@ export class RequestController {
   }
 
   //email
-  @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard,RolesGuard)
  @Roles(UserRole.ADMIN)
   @Post('email/:id')
   async getEmail(@Body() emailData: any) {
