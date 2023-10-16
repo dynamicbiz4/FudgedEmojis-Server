@@ -44,7 +44,7 @@ export class RequestService {
       mailSent: false,
       spinnerResult: 0,
       voucherType: '',
-      status: 0,
+      status: 1,
       spinBy: spinBy,
     };
     const newRequest = new this.requestModel(requestData);
@@ -54,12 +54,12 @@ export class RequestService {
       throw new Error('Request not Created');
     }
 
-    return { message: 'Request Created Successfully' };
+    return { message: 'Request Created Successfully' , data : createdRequest};
   }
 
   async findAll() {
     const allRequests = await this.requestModel
-      .find({ status: 0 })
+      .find({status: { $in: [0, 1] }})
       .sort({ createdAt: -1 })
       .exec();
 
@@ -68,9 +68,9 @@ export class RequestService {
 
   // reviewed for spin requests
   async getAllForSpin(email: string) {
-    const query: any = { status: { $in: [0, 1] } };
+    const query: any = { status: { $in: [ 1, 4] } };
     if (email) {
-      query.createdUser  = email;
+      query.createdUser  = email; 
     }
     
     const allForSpin = await this.requestModel.find(query).exec();
@@ -121,7 +121,6 @@ export class RequestService {
     if (!Types.ObjectId.isValid(id)) {
       throw new BadRequestException('Invalid ID format');
     }
-
     const updatedRequest = await this.requestModel
       .updateOne(
         { _id: id },

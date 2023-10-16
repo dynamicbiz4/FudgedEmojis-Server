@@ -74,8 +74,8 @@ export class RequestController {
     return this.requestService.findOne(id);
   }
 
-  @UseGuards(JwtAuthGuard,RolesGuard)
-  @Roles(UserRole.ADMIN)
+  @UseGuards(JwtAuthGuard)
+  // @Roles(UserRole.ADMIN)
   @Put('update/:id')
   update(@Param('id') id: string, @Body() dto: UpdateRequestDto) {
     return this.requestService.update(id, dto);
